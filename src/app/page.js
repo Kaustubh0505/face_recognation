@@ -35,17 +35,28 @@ export default function Home() {
 
       {/* Action Buttons */}
       <div className="flex flex-col md:flex-row gap-6 mb-12">
-        <button className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition">
+
+        <button
+          onClick={() => router.push('/auth/signup')}
+          className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition"
+        >
           Sign Up
         </button>
-        <button className="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow hover:bg-green-700 transition">
+
+        <button
+          onClick={() => router.push('/auth/login')}
+          className="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow hover:bg-green-700 transition"
+        >
           Login
         </button>
-        <button className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700 transition">
+
+        <button
+          className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700 transition"
+        >
           Mark Attendance
         </button>
-      </div>
 
+      </div>
       {/* How It Works */}
       <section className="w-full max-w-4xl text-center">
         <h2 className="text-2xl font-bold text-gray-800 mb-6">How It Works</h2>
@@ -70,4 +81,5 @@ export default function Home() {
         &copy; {new Date().getFullYear()} Face Recognition Attendance System
       </footer>
     </div>
-  )}
+  )
+}

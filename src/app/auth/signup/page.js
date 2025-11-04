@@ -1,35 +1,45 @@
 "use client";
-import React, { useState } from 'react';
-import { auth } from '../../libs/utils/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { useRouter } from 'next/navigation';
+import React, { useState } from "react";
+import { auth } from "../../libs/utils/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 const SignupPage = () => {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      setSuccess('Signup successful! You can now log in.');
-      setError('');
+      setSuccess("Signup successful! Redirecting...");
+      setError("");
+      router.push("/attendance");
     } catch (err) {
       setError(err.message);
-      setSuccess('');
+      setSuccess("");
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-gray-500 to-gray-900">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h1 className="text-3xl font-bold text-center text-gray-700 mb-6">Create Account</h1>
+    <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-gradient-to-br from-[#432DD7] via-[#2C1A8C] to-[#0F0B2E] text-white">
+
+      <div className="absolute -top-32 -left-20 w-96 h-96 bg-[#432DD7]/30 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#432DD7]/20 rounded-full blur-3xl"></div>
+
+
+      <div className="relative z-10 bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-2xl shadow-2xl w-96">
+        <h1 className="text-3xl font-bold text-center mb-2">Create Account</h1>
+        <p className="text-center text-sm text-gray-300 mb-6">
+          Join us and manage your attendance effortlessly.
+        </p>
+
         <form onSubmit={handleSignup}>
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-200">
               Email
             </label>
             <input
@@ -37,12 +47,14 @@ const SignupPage = () => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="mt-1 block w-full px-4 py-2 bg-white/20 border border-white/30 rounded-md text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#6E57FF] transition"
+              placeholder="you@example.com"
               required
             />
           </div>
+
           <div className="mb-4">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-200">
               Password
             </label>
             <input
@@ -50,29 +62,36 @@ const SignupPage = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="mt-1 block w-full px-4 py-2 bg-white/20 border border-white/30 rounded-md text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#6E57FF] transition"
+              placeholder="••••••••"
               required
             />
           </div>
-          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-          {success && <p className="text-green-500 text-sm mb-4">{success}</p>}
+
+          {error && <p className="text-red-400 text-sm mb-4">{error}</p>}
+          {success && <p className="text-green-400 text-sm mb-4">{success}</p>}
+
           <button
             type="submit"
-            className="w-full bg-gray-600 text-white py-2 cursor-pointer px-4 rounded hover:bg-gray-700 transition duration-300"
+            className="w-full bg-gradient-to-r from-[#6E57FF] to-[#432DD7] py-2 rounded-md text-white font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] transition-transform duration-300"
           >
-            Signup
+            Sign Up
           </button>
         </form>
+
         <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">Already have an account?</p>
+          <p className="text-sm text-gray-300">Already have an account?</p>
           <button
-            onClick={() => router.push('/auth/login')}
-            className="text-indigo-600 cursor-pointer hover:underline mt-2"
+            onClick={() => router.push("/auth/login")}
+            className="text-[#A896FF] font-medium hover:text-white transition"
           >
             Login
           </button>
         </div>
       </div>
+
+
+      <div className="absolute inset-0 pointer-events-none animate-pulse bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.05),transparent)]"></div>
     </div>
   );
 };
