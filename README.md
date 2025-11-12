@@ -43,5 +43,4 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/attendease.git
-cd attendease
+git clone https://github.com/Kaustubh0505/face_recognation
