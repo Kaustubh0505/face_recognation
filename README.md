@@ -7,7 +7,7 @@
 ## 🚀 Tech Stack  
 - **Frontend:** React.js, React Router, TailwindCSS / Bootstrap  
 - **Backend:** Node.js, Express.js  
-- **Database:** MongoDB (via Mongoose ORM)  
+- **Database:** MongoDB (via Prisma ORM)  
 - **Authentication:** JWT-based login/signup (Admin / Teacher / Student)  
 - **Hosting:** Vercel (frontend), Render / Railway (backend), MongoDB Atlas (DB)
 
