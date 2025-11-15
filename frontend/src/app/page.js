@@ -1,15 +1,10 @@
 "use client";
 import Head from "next/head";
-import { checkAuthAndRedirect } from "./libs/utils/firebase.js";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Home() {
   const router = useRouter();
-
-  useEffect(() => {
-    checkAuthAndRedirect(router);
-  }, [router]);
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-[#432DD7] via-[#2A1B9C] to-[#0F0B2E] text-white">
@@ -39,14 +34,14 @@ export default function Home() {
       {/* Action Buttons */}
       <div className="z-10 flex flex-col md:flex-row gap-6 mb-20">
         <button
-          onClick={() => router.push("/auth/signup")}
+          onClick={() => router.push("/signup")}
           className="px-8 py-3 bg-gradient-to-r from-[#6E57FF] to-[#432DD7] text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.05] transition-all duration-300"
         >
           Sign Up
         </button>
 
         <button
-          onClick={() => router.push("/auth/login")}
+          onClick={() => router.push("/login")}
           className="px-8 py-3 bg-white/10 border border-white/30 text-white font-semibold rounded-xl shadow-lg hover:bg-white/20 hover:scale-[1.05] transition-all duration-300"
         >
           Login
