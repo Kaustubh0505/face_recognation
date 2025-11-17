@@ -6,20 +6,23 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError("");
+    setIsLoading(true);
 
     if (!email || !password) {
       setError("Please fill in both fields.");
+      setIsLoading(false);
       return;
     }
 
     try {
-      const res = await fetch("http://localhost:3002/login", {
+      const res = await fetch(process.env.NEXT_PUBLIC_BACKENDURL + "/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -29,22 +32,21 @@ const LoginPage = () => {
 
       if (!res.ok) {
         setError(data.message || "Invalid login credentials!");
+        setIsLoading(false);
         return;
       }
 
       localStorage.setItem("token", data.token);
 
-      setSuccess("Login Successful! Redirecting...");
-      setError("");
+      router.push("/register");
 
-      setTimeout(() => {
-        router.push("/register");
-      }, 1000);
-
+      
     } catch (err) {
       setError("Something went wrong. Try again!");
       console.log(err);
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -91,13 +93,21 @@ const LoginPage = () => {
           </div>
 
           {error && <p className="text-red-400 text-sm mb-4">{error}</p>}
-          {success && <p className="text-green-400 text-sm mb-4">{success}</p>}
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-[#6E57FF] to-[#432DD7] py-2 rounded-md text-white font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] transition-transform duration-300"
+            disabled={isLoading}
+            className={`w-full bg-gradient-to-r from-[#6E57FF] to-[#432DD7] py-2 rounded-md text-white font-semibold shadow-md transition-transform duration-300
+              ${isLoading ? "opacity-70 cursor-not-allowed" : "hover:shadow-lg hover:scale-[1.02]"}`}
           >
-            Login
+            {isLoading ? (
+              <div className="flex items-center justify-center gap-2">
+                <div className="w-5 h-5 border-[3px] border-white border-t-transparent rounded-full animate-spin"></div>
+                Logging in...
+              </div>
+            ) : (
+              "Login"
+            )}
           </button>
         </form>
 

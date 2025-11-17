@@ -27,18 +27,32 @@ app.get("/", (req, res) => {
 app.post("/signup", async (req, res) => {
   try {
     const { email, password } = req.body;
-    const hashedPass = await bcrypt.hash(password,10)
 
-    const user = await prisma.user.create({
-      data: { email:email, password:hashedPass},
+    const existingUser = await prisma.user.findUnique({
+      where: { email }
     });
 
-    res.status(201).json(user);
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists!" });
+    }
+
+    const hashedPass = await bcrypt.hash(password, 10);
+
+    const user = await prisma.user.create({
+      data: {
+        email,
+        password: hashedPass,
+      },
+    });
+
+    return res.status(201).json({ message: "User created successfully!" });
+
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: err.message });
+    return res.status(500).json({ message: "Server error!" });
   }
 });
+
 
 
 app.post("/login", async (req, res) => {
