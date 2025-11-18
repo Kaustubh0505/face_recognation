@@ -40,8 +40,6 @@ const SignupPage = () => {
         return;
       }
 
-
-
         router.push("/login");
 
     } catch (err) {

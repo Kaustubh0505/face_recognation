@@ -10,7 +10,7 @@ const Register = () => {
   const webcamRef = useRef(null);
   const [capturedImage, setCapturedImage] = useState(null);
   const [name, setName] = useState("");
-  const [step, setStep] = useState(1); // 1=Info, 2=Name, 3=Camera, 4=Preview, 5=Success
+  const [step, setStep] = useState(1);
 
   const capturePhoto = () => {
     const imageSrc = webcamRef.current.getScreenshot();

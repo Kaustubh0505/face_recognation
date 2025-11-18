@@ -18,15 +18,14 @@
       "static/chunks/_a0ff3932._.js",
       "static/chunks/turbopack-_cdba956c._.js"
     ],
-    "/register/page": [
+    "/page": [
       "static/chunks/node_modules_next_dist_8db7fb1f._.js",
       "static/chunks/src_app_favicon_ico_mjs_243aa161._.js",
       "static/chunks/[root-of-the-server]__a3dce129._.css",
       "static/chunks/src_app_layout_0a548d63.js",
       "static/chunks/node_modules_next_dist_client_components_builtin_global-error_3ead9ac7.js",
-      "static/chunks/node_modules_react-webcam_dist_react-webcam_e654cd37.js",
-      "static/chunks/_ca72613e._.js",
-      "static/chunks/src_app_register_page_3ead9ac7.js",
+      "static/chunks/_44d19d91._.js",
+      "static/chunks/src_app_page_3ead9ac7.js",
       "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_57d40746._.js",
       "static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js",
       "static/chunks/node_modules_next_dist_compiled_next-devtools_index_a9cb0712.js",

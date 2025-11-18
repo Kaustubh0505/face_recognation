@@ -11,11 +11,16 @@ const prisma = new PrismaClient();
 
 
 app.use(cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type"]
-  }));
-  
+  origin: [
+    "https://face-recognation-omega.vercel.app", 
+    "http://localhost:3000"
+  ],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
+app.options("*", cors());
 app.use(express.json());
 
 

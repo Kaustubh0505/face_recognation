@@ -35,20 +35,19 @@ export default function Home() {
       <div className="z-10 flex flex-col md:flex-row gap-6 mb-20">
         <button
           onClick={() => router.push("/signup")}
-          className="px-8 py-3 bg-gradient-to-r from-[#6E57FF] to-[#432DD7] text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.05] transition-all duration-300"
+          className="px-8 cursor-pointer py-3 bg-gradient-to-r from-[#6E57FF] to-[#432DD7] text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.05] transition-all duration-300"
         >
           Sign Up
         </button>
-
         <button
           onClick={() => router.push("/login")}
-          className="px-8 py-3 bg-white/10 border border-white/30 text-white font-semibold rounded-xl shadow-lg hover:bg-white/20 hover:scale-[1.05] transition-all duration-300"
+          className="px-8 cursor-pointer py-3 bg-white/10 border border-white/30 text-white font-semibold rounded-xl shadow-lg hover:bg-white/20 hover:scale-[1.05] transition-all duration-300"
         >
           Login
         </button>
 
         <button
-          className="px-8 py-3 bg-gradient-to-r from-[#00B4DB] to-[#0083B0] text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.05] transition-all duration-300"
+          className="px-8 cursor-pointer py-3 bg-gradient-to-r from-[#00B4DB] to-[#0083B0] text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.05] transition-all duration-300"
         >
           Mark Attendance
         </button>
