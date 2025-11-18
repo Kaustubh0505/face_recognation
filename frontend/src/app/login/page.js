@@ -97,7 +97,7 @@ const LoginPage = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full bg-gradient-to-r from-[#6E57FF] to-[#432DD7] py-2 rounded-md text-white font-semibold shadow-md transition-transform duration-300
+            className={`w-full cursor-pointer bg-gradient-to-r from-[#6E57FF] to-[#432DD7] py-2 rounded-md text-white font-semibold shadow-md transition-transform duration-300
               ${isLoading ? "opacity-70 cursor-not-allowed" : "hover:shadow-lg hover:scale-[1.02]"}`}
           >
             {isLoading ? (
