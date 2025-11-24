@@ -1,156 +1,105 @@
 "use client";
-import React, { useRef, useState } from "react";
-import dynamic from "next/dynamic";
+import React, { useState, useEffect } from "react";
+import FaceCamera from "@/components/FaceCamera";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 
-const Webcam = dynamic(() => import("react-webcam"), { ssr: false });
-
-const Register = () => {
+export default function RegisterFace() {
   const router = useRouter();
-  const webcamRef = useRef(null);
-  const [capturedImage, setCapturedImage] = useState(null);
-  const [name, setName] = useState("");
-  const [step, setStep] = useState(1);
+  const [status, setStatus] = useState({ type: "", message: "" });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const capturePhoto = () => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    setCapturedImage(imageSrc);
-    setStep(4);
-  };
 
-  const handleRegister = () => {
-    if (!name || !capturedImage) {
-      alert("Please enter your name and capture your face!");
-      return;
+  useEffect(() => {
+    const checkRegistration = async () => {
+      // Ensure we're on the client side
+      if (typeof window === 'undefined') return;
+
+      const userId = localStorage.getItem("userId");
+      if (!userId) {
+        console.log("No userId found in localStorage");
+        return;
+      }
+      if (!userId) return;
+  
+        try {
+          const res = await axios.get(`http://localhost:3002/api/face/check/${userId}`);
+          if (res.data.registered) {
+            setStatus({ type: "info", message: "You are already registered. Redirecting to attendance..." });
+            setTimeout(() => {
+              router.push("/attendance");
+            }, 2000);
+          }
+        } catch (err) {
+          console.error("Error checking registration:", err);
+        }
+    };
+
+
+    checkRegistration();
+  }, [router]);
+
+  
+
+  const handleCapture = async (descriptor) => {
+    const userId = localStorage.getItem("userId");
+    setIsLoading(true);
+    setStatus({ type: "info", message: "Registering face..." });
+
+    try {
+      await axios.post("http://localhost:3002/api/face/register", {
+        userId,
+        descriptor,
+      });
+
+      setStatus({ type: "success", message: "Face Registered Successfully! Redirecting..." });
+
+      setTimeout(() => {
+        router.push("/attendance");
+      }, 2000);
+
+    } catch (err) {
+      console.error(err);
+      if (err.response && err.response.status === 400) {
+        setStatus({ type: "warning", message: "User already registered! Redirecting..." });
+        setTimeout(() => {
+          router.push("/attendance");
+        }, 2000);
+      } else {
+        setStatus({ type: "error", message: "Failed to register face. Please try again." });
+      }
+      setIsLoading(false);
     }
-    setStep(5);
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
-      <div className="bg-white shadow-xl rounded-2xl p-10 w-full max-w-xl text-center border border-indigo-100">
-        
-        {/* Step 1: Intro */}
-        {step === 1 && (
-          <>
-            <h1 className="text-3xl font-bold text-indigo-700 mb-4">
-              Smart AI-Based Face Attendance
-            </h1>
-            <p className="text-gray-600 mb-6 leading-relaxed">
-              This system helps streamline student attendance using secure 
-              face recognition technology. Register your face once and 
-              simply look at the camera every day to mark your attendance!
-            </p>
+    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-[#432DD7] via-[#2A1B9C] to-[#0F0B2E] text-white">
 
-            <div className="text-left p-4 bg-indigo-50 rounded-lg border-l-4 border-indigo-600 mb-6">
-              <p className="font-semibold text-indigo-700 mb-2">
-                ⚠️ Before you start:
-              </p>
-              <ul className="text-gray-700 space-y-2 text-sm">
-                <li>✔ Ensure good lighting on your face</li>
-                <li>✔ Remove mask, cap, or sunglasses</li>
-                <li>✔ Sit straight and look directly into the camera</li>
-                <li>✔ Your full face must be clearly visible</li>
-              </ul>
-            </div>
+      {/* Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute -top-20 -left-20 w-96 h-96 bg-[#432DD7]/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#6E57FF]/20 rounded-full blur-3xl"></div>
+      </div>
 
-            <button
-              onClick={() => setStep(2)}
-              className="w-full py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition"
-            >
-              Start Registration 🚀
-            </button>
-          </>
+      <div className="relative z-10 w-full max-w-md p-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl">
+        <h2 className="text-3xl font-bold text-center mb-2">Register Face</h2>
+        <p className="text-center text-gray-300 mb-6 text-sm">
+          Capture your face to enable secure attendance.
+        </p>
+
+        <div className="flex justify-center mb-6">
+          <FaceCamera onCapture={handleCapture} />
+        </div>
+
+        {status.message && (
+          <div className={`mt-4 p-3 rounded-lg text-center text-sm font-medium animate-fade-in
+            ${status.type === "success" ? "bg-green-500/20 text-green-200 border border-green-500/30" :
+              status.type === "error" ? "bg-red-500/20 text-red-200 border border-red-500/30" :
+                "bg-blue-500/20 text-blue-200 border border-blue-500/30"}`}>
+            {status.message}
+          </div>
         )}
-
-        {/* Step 2: Enter Name */}
-        {step === 2 && (
-          <>
-            <h2 className="text-xl font-semibold text-indigo-700 mb-4">
-              Enter Your Full Name
-            </h2>
-            <input
-              type="text"
-              placeholder="Eg: John David Antony"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full p-3 mb-5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-600 outline-none"
-            />
-            <button
-              onClick={() => name ? setStep(3) : alert("Enter your name!")}
-              className="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition"
-            >
-              Continue ➜
-            </button>
-          </>
-        )}
-
-        {/* Step 3: Camera */}
-        {step === 3 && (
-          <>
-            <h2 className="text-xl font-semibold text-indigo-700 mb-3">
-              Capture Your Face
-            </h2>
-            <div className="border-4 border-indigo-300 rounded-lg overflow-hidden shadow-md mb-4">
-              <Webcam
-                audio={false}
-                ref={webcamRef}
-                screenshotFormat="image/jpeg"
-                className="w-full"
-                mirrored={true}
-              />
-            </div>
-            <button
-              onClick={capturePhoto}
-              className="w-full py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition"
-            >
-              Capture Photo 📸
-            </button>
-          </>
-        )}
-
-        {/* Step 4: Image Preview */}
-        {step === 4 && (
-          <>
-            <h2 className="text-xl font-semibold text-indigo-700 mb-3">
-              Preview Your Captured Image
-            </h2>
-            <img src={capturedImage} className="rounded-lg shadow-md mb-6" />
-            <div className="flex gap-4">
-              <button
-                onClick={() => setStep(3)}
-                className="flex-1 py-3 bg-gray-400 text-white rounded-lg font-semibold hover:bg-gray-500"
-              >
-                Retake 🔄
-              </button>
-              <button
-                onClick={handleRegister}
-                className="flex-1 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700"
-              >
-                Register ✔
-              </button>
-            </div>
-          </>
-        )}
-
-        {/* Step 5: Success */}
-        {step === 5 && (
-          <>
-            <p className="text-green-700 font-semibold text-lg mb-6">
-              🎉 Face Registered Successfully!
-            </p>
-            <button
-              onClick={() => router.push("/attendance")}
-              className="w-full py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700"
-            >
-              Go to Attendance 📍
-            </button>
-          </>
-        )}
-
       </div>
     </div>
   );
-};
-
-export default Register;
+}

@@ -8,9 +8,25 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  email     String   @unique
+  id        String           @id @default(auto()) @map("_id") @db.ObjectId
+  email     String           @unique
   password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  role      String?
+  faceData  FaceEmbedding[]
+  attendance Attendance[]
+}
+
+model FaceEmbedding {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  descriptor  Float[]
+  userId      String   @db.ObjectId
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+model Attendance {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  timestamp DateTime @default(now())
 }

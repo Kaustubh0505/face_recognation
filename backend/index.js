@@ -2,17 +2,20 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt"
-import jwt from "jsonwebtoken"
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import faceRoutes from "./routes/faceRoutes.js";
+import attendanceRoutes from "./routes/attendanceRoutes.js";
 
 dotenv.config();
+
 const app = express();
 const prisma = new PrismaClient();
 
-
+// Middleware
 app.use(cors({
   origin: [
-    "https://face-recognation-omega.vercel.app", 
+    "https://face-recognation-omega.vercel.app",
     "http://localhost:3000"
   ],
   credentials: true,
@@ -20,15 +23,17 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-app.options("*", cors());
 app.use(express.json());
 
+// Routes
+app.use("/api/face", faceRoutes);
+app.use("/api/attendance", attendanceRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).send("Backend + Prisma is connected!");
 });
 
-
+// Signup Route
 app.post("/signup", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -43,7 +48,7 @@ app.post("/signup", async (req, res) => {
 
     const hashedPass = await bcrypt.hash(password, 10);
 
-    const user = await prisma.user.create({
+    await prisma.user.create({
       data: {
         email,
         password: hashedPass,
@@ -52,22 +57,16 @@ app.post("/signup", async (req, res) => {
 
     return res.status(201).json({ message: "User created successfully!" });
 
-  } catch (err) {
-    console.error(err);
+  }  catch (err) {
+    console.error("Signup error:", err); // 🔍 Add this
     return res.status(500).json({ message: "Server error!" });
   }
 });
 
-
-
+// Login Route
 app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    if (!email || !password) {
-      return res.status(400).json({ message: "All fields are required" });
-    }
-
 
     const user = await prisma.user.findUnique({
       where: { email },
@@ -78,6 +77,7 @@ app.post("/login", async (req, res) => {
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
+
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid password" });
     }
@@ -103,17 +103,5 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/users", async (req, res) => {
-  try {
-    const users = await prisma.user.findMany({
-      orderBy: { createdAt: "desc" },
-    });
-    res.status(200).json(users);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
 const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-
