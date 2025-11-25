@@ -98,8 +98,8 @@ app.post("/login", async (req, res) => {
     });
 
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server Error" });
+    console.error("err" , err);
+    res.status(500).json({ message: "312Server Error" });
   }
 });
 
