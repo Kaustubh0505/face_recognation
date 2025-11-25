@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 const prisma = new PrismaClient();
 
-// Middleware
+
 app.use(cors({
   origin: [
     "https://face-recognation-omega.vercel.app",

@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import * as faceapi from "face-api.js";
-import axios from "axios";
 
 export function useFaceMatcher() {
   const [matcher, setMatcher] = useState(null);
@@ -9,9 +8,10 @@ export function useFaceMatcher() {
 
   useEffect(() => {
     const loadFaces = async () => {
-      const res = await axios.get("http://localhost:3002/api/face/all");
+      const res = await fetch("http://localhost:3002/api/face/all");
+      const data = await res.json();
 
-      const labeled = res.data.map(f => {
+      const labeled = data.map(f => {
         const descriptor = new Float32Array(JSON.parse(f.embedding));
         return new faceapi.LabeledFaceDescriptors(f.userId, [descriptor]);
       });
@@ -20,7 +20,7 @@ export function useFaceMatcher() {
       setMatcher(match);
       setLoading(false);
     };
-    
+
     loadFaces();
   }, []);
 

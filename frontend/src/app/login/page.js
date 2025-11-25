@@ -44,8 +44,9 @@ const LoginPage = () => {
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("userId", data.user.id);
+      localStorage.setItem("userEmail", data.user.email);
 
-      router.push("/register");
+      router.push("/dashboard");
 
 
     } catch (err) {

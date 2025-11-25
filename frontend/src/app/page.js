@@ -47,6 +47,13 @@ export default function Home() {
         </button>
 
         <button
+          onClick={() => router.push("/dashboard")}
+          className="px-8 cursor-pointer py-3 bg-gradient-to-r from-[#FF6B6B] to-[#EE5A6F] text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.05] transition-all duration-300"
+        >
+          Dashboard
+        </button>
+
+        <button
           onClick={() => router.push("/attendance")}
           className="px-8 cursor-pointer py-3 bg-gradient-to-r from-[#00B4DB] to-[#0083B0] text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.05] transition-all duration-300"
         >

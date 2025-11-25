@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import FaceCamera from "@/components/FaceCamera";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 
 export default function RegisterFace() {
@@ -21,25 +20,27 @@ export default function RegisterFace() {
         return;
       }
       if (!userId) return;
-  
-        try {
-          const res = await axios.get(`http://localhost:3002/api/face/check/${userId}`);
-          if (res.data.registered) {
-            setStatus({ type: "info", message: "You are already registered. Redirecting to attendance..." });
-            setTimeout(() => {
-              router.push("/attendance");
-            }, 2000);
-          }
-        } catch (err) {
-          console.error("Error checking registration:", err);
+
+      try {
+        const res = await fetch(`http://localhost:3002/api/face/check/${userId}`);
+        const data = await res.json();
+
+        if (data.registered) {
+          setStatus({ type: "info", message: "You are already registered. Redirecting to dashboard..." });
+          setTimeout(() => {
+            router.push("/dashboard");
+          }, 2000);
         }
+      } catch (err) {
+        console.error("Error checking registration:", err);
+      }
     };
 
 
     checkRegistration();
   }, [router]);
 
-  
+
 
   const handleCapture = async (descriptor) => {
     const userId = localStorage.getItem("userId");
@@ -47,27 +48,42 @@ export default function RegisterFace() {
     setStatus({ type: "info", message: "Registering face..." });
 
     try {
-      await axios.post("http://localhost:3002/api/face/register", {
-        userId,
-        descriptor,
+      const res = await fetch("http://localhost:3002/api/face/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId,
+          descriptor,
+        })
+
       });
+      console.log(userId,descriptor)
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        if (res.status === 400) {
+          setStatus({ type: "warning", message: "User already registered! Redirecting..." });
+          setTimeout(() => {
+            router.push("/dashboard");
+          }, 2000);
+        } else {
+          setStatus({ type: "error", message: "Failed to register face. Please try again." });
+        }
+        setIsLoading(false);
+        return;
+      }
 
       setStatus({ type: "success", message: "Face Registered Successfully! Redirecting..." });
 
       setTimeout(() => {
-        router.push("/attendance");
+        router.push("/dashboard");
       }, 2000);
 
     } catch (err) {
       console.error(err);
-      if (err.response && err.response.status === 400) {
-        setStatus({ type: "warning", message: "User already registered! Redirecting..." });
-        setTimeout(() => {
-          router.push("/attendance");
-        }, 2000);
-      } else {
-        setStatus({ type: "error", message: "Failed to register face. Please try again." });
-      }
+      setStatus({ type: "error", message: "Failed to register face. Please try again." });
       setIsLoading(false);
     }
   };
