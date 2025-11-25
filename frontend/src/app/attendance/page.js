@@ -40,7 +40,8 @@ export default function MarkAttendance() {
     setStatus({ type: "info", message: "Verifying face with server..." });
 
     try {
-      const res = await fetch("http://localhost:3002/api/attendance/mark", {
+
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKENDURL}/api/attendance/mark`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -22,7 +22,7 @@ export default function RegisterFace() {
       if (!userId) return;
 
       try {
-        const res = await fetch(`http://localhost:3002/api/face/check/${userId}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKENDURL}/api/face/check/${userId}`);
         const data = await res.json();
 
         if (data.registered) {
@@ -48,7 +48,7 @@ export default function RegisterFace() {
     setStatus({ type: "info", message: "Registering face..." });
 
     try {
-      const res = await fetch("http://localhost:3002/api/face/register", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKENDURL}/api/face/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -48,7 +48,7 @@ export default function AttendanceHistory() {
         try {
             // Fetch attendance history
             const historyRes = await fetch(
-                `http://localhost:3002/api/attendance/history/${userId}`
+                `${process.env.NEXT_PUBLIC_BACKENDURL}/api/attendance/history/${userId}`
             );
             const historyData = await historyRes.json();
 
@@ -56,7 +56,7 @@ export default function AttendanceHistory() {
 
             // Fetch attendance summary
             const summaryRes = await fetch(
-                `http://localhost:3002/api/attendance/summary/${userId}`
+                `${process.env.NEXT_PUBLIC_BACKENDURL}/api/attendance/summary/${userId}`
             );
             const summaryData = await summaryRes.json();
 

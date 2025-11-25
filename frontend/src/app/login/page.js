@@ -22,17 +22,12 @@ const LoginPage = () => {
     }
 
     try {
-      // const res = await fetch(process.env.NEXT_PUBLIC_BACKENDURL + "/login", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ email, password }),
-      // });
-      const res = await fetch("http://localhost:3002/login"
-        , {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
-        });
+      const res = await fetch(process.env.NEXT_PUBLIC_BACKENDURL + "/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
 
       const data = await res.json();
 

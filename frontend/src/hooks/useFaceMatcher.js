@@ -8,7 +8,7 @@ export function useFaceMatcher() {
 
   useEffect(() => {
     const loadFaces = async () => {
-      const res = await fetch("http://localhost:3002/api/face/all");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKENDURL}/api/face/all`);
       const data = await res.json();
 
       const labeled = data.map(f => {
