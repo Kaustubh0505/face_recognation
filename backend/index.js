@@ -66,28 +66,29 @@ app.post("/signup", async (req, res) => {
 // Login Route
 app.post("/login", async (req, res) => {
   try {
+    console.log(check1)
     const { email, password } = req.body;
 
     const user = await prisma.user.findUnique({
       where: { email },
     });
-
+    console.log(check2)
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-
+    console.log(check3)
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid password" });
     }
-
+    console.log(check4)
     const token = jwt.sign(
       { id: user.id, email: user.email },
       process.env.JWT_SECRET_KEY,
       { expiresIn: "7d" }
     );
-
+    console.log(check5)
     res.json({
       message: "Login Successful",
       token,
@@ -98,7 +99,7 @@ app.post("/login", async (req, res) => {
     });
 
   } catch (err) {
-    console.error("err" , err);
+    console.log("err" , err);
     res.status(500).json({ message: "312Server Error" });
   }
 });
