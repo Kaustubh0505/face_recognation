@@ -27,7 +27,7 @@ export default function Dashboard() {
             localStorage.clear();
             router.push("/login");
           }}
-          className="bg-red-500 text-white px-4 py-2 rounded-lg font-medium shadow hover:bg-red-600 transition"
+          className="bg-red-500 cursor-pointer text-white px-4 py-2 rounded-lg font-medium shadow hover:bg-red-600 transition"
         >
           Logout
         </button>
@@ -49,7 +49,7 @@ export default function Dashboard() {
         {/* Mark Attendance */}
         <button
           onClick={() => router.push("/attendance")}
-          className="bg-white border border-green-300 rounded-2xl p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition"
+          className="bg-white cursor-pointer border border-green-300 rounded-2xl p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition"
         >
           <h3 className="text-2xl font-bold text-green-700 mb-2">
             Mark Attendance
@@ -62,7 +62,7 @@ export default function Dashboard() {
         {/* Register Face */}
         <button
           onClick={() => router.push("/register")}
-          className="bg-white border border-green-300 rounded-2xl p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition"
+          className="bg-white border cursor-pointer border-green-300 rounded-2xl p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition"
         >
           <h3 className="text-2xl font-bold text-green-700 mb-2">
             Register Face
@@ -75,7 +75,7 @@ export default function Dashboard() {
         {/* View Attendance */}
         <button
           onClick={() => router.push("/attendance-history")}
-          className="bg-white border border-green-300 rounded-2xl p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition"
+          className="bg-white cursor-pointer border border-green-300 rounded-2xl p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition"
         >
           <h3 className="text-2xl font-bold text-green-700 mb-2">
             View Attendance

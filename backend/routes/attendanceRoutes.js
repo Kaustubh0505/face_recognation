@@ -12,26 +12,29 @@ router.post("/mark", async (req, res) => {
       return res.status(400).json({ msg: "UserId and Face Descriptor required" });
     }
 
-    // 1. Check if user has a registered face
     const faceRecord = await prisma.faceEmbedding.findFirst({
       where: { userId },
     });
-    
+
     if (!faceRecord) {
       return res.status(400).json({ msg: "Face not registered for this user" });
     }
-    console.log("face",faceRecord)
-    
-    // 2. Verify Face Match (Euclidean Distance)
-    const storedDescriptor = JSON.parse(faceRecord.descriptor);
-    console.log("check")
-    const distance = euclideanDistance(descriptor, storedDescriptor);
 
-    if (distance > 0.6) { // Threshold (0.6 is standard for face-api.js)
-      return res.status(400).json({ msg: "Face mismatch — attendance not allowed" });
+    const storedDescriptor = new Float32Array(JSON.parse(faceRecord.descriptor));
+    const incomingDescriptor = new Float32Array(descriptor);
+
+    if (incomingDescriptor.length !== storedDescriptor.length) {
+      return res.status(400).json({ msg: "Invalid face descriptor" });
     }
 
-    // 3. Prevent multiple attendance in same day
+    // Face matching using Euclidean Distance
+    const distance = euclideanDistance(incomingDescriptor, storedDescriptor);
+    console.log("Distance:", distance);
+
+    if (distance > 0.6) {
+      return res.status(403).json({ msg: "Unauthorized Face - Not the registered user" });
+    }
+
     const startOfDay = new Date();
     startOfDay.setHours(0, 0, 0, 0);
 
@@ -49,15 +52,15 @@ router.post("/mark", async (req, res) => {
     await prisma.attendance.create({
       data: {
         userId,
-        status: "Present"
+        status: "Present",
       },
     });
 
-    return res.json({ msg: "Attendance Marked" });
+    return res.json({ msg: "Attendance Marked Successfully" });
 
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ msg: "Server Error" });
+    console.error("Attendance Error:", err);
+    return res.status(500).json({ msg: "Server Error" });
   }
 });
 

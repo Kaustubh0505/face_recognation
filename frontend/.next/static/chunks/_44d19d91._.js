@@ -20,67 +20,59 @@ function Home() {
     _s();
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-[#432DD7] via-[#2A1B9C] to-[#0F0B2E] text-white",
+        className: "min-h-screen bg-gradient-to-br from-white via-[#E6F8E7] to-[#CFF5D1] p-6 text-green-900 relative",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$components$2f$noop$2d$head$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("title", {
-                        children: "Face Recognition Attendance System"
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/page.js",
-                        lineNumber: 12,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("meta", {
-                        name: "description",
-                        content: "Mark attendance automatically using facial recognition"
+                        children: "AttendEase - Face Recognition Attendance System"
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.js",
                         lineNumber: 13,
                         columnNumber: 9
                     }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("link", {
-                        rel: "icon",
-                        href: "/favicon.ico"
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("meta", {
+                        name: "description",
+                        content: "Smart Attendance powered by AI Facial Recognition"
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.js",
-                        lineNumber: 17,
+                        lineNumber: 14,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/page.js",
-                lineNumber: 11,
+                lineNumber: 12,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "absolute -top-40 -left-32 w-[500px] h-[500px] bg-[#432DD7]/25 rounded-full blur-3xl"
+                className: "absolute top-0 left-0 w-64 h-64 bg-green-200/40 rounded-full blur-3xl"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.js",
                 lineNumber: 21,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#6E57FF]/20 rounded-full blur-3xl"
+                className: "absolute bottom-0 right-0 w-72 h-72 bg-green-300/30 rounded-full blur-3xl"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.js",
                 lineNumber: 22,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
-                className: "z-10 w-full max-w-4xl text-center mb-16 px-4",
+                className: "z-10 text-center max-w-4xl mx-auto mt-12 mb-16",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                        className: "text-5xl md:text-6xl font-extrabold mb-4 tracking-tight",
-                        children: "Face Recognition Attendance System"
+                        className: "text-5xl md:text-6xl font-extrabold text-green-700",
+                        children: "AttendEase"
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.js",
                         lineNumber: 26,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-gray-300 text-lg md:text-xl",
-                        children: "Seamlessly mark attendance using AI-powered facial recognition"
+                        className: "mt-4 text-lg md:text-xl text-green-600",
+                        children: "Touchless Attendance Authentication Using AI Face Matching"
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.js",
                         lineNumber: 29,
@@ -93,11 +85,11 @@ function Home() {
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "z-10 flex flex-col md:flex-row gap-6 mb-20",
+                className: "z-10 flex flex-col md:flex-row gap-6 justify-center mb-20",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: ()=>router.push("/signup"),
-                        className: "px-8 cursor-pointer py-3 bg-gradient-to-r from-[#6E57FF] to-[#432DD7] text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.05] transition-all duration-300",
+                        className: "px-10 py-3 cursor-pointer bg-green-600 text-white font-semibold rounded-xl shadow hover:bg-green-700 hover:scale-105 transition",
                         children: "Sign Up"
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.js",
@@ -106,29 +98,11 @@ function Home() {
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: ()=>router.push("/login"),
-                        className: "px-8 cursor-pointer py-3 bg-white/10 border border-white/30 text-white font-semibold rounded-xl shadow-lg hover:bg-white/20 hover:scale-[1.05] transition-all duration-300",
+                        className: "px-10 py-3 bg-white border cursor-pointer border-green-300 text-green-700 font-semibold rounded-xl shadow hover:bg-green-50 hover:scale-105 transition",
                         children: "Login"
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.js",
-                        lineNumber: 42,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        onClick: ()=>router.push("/dashboard"),
-                        className: "px-8 cursor-pointer py-3 bg-gradient-to-r from-[#FF6B6B] to-[#EE5A6F] text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.05] transition-all duration-300",
-                        children: "Dashboard"
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/page.js",
-                        lineNumber: 49,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        onClick: ()=>router.push("/attendance"),
-                        className: "px-8 cursor-pointer py-3 bg-gradient-to-r from-[#00B4DB] to-[#0083B0] text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.05] transition-all duration-300",
-                        children: "Mark Attendance"
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/page.js",
-                        lineNumber: 56,
+                        lineNumber: 43,
                         columnNumber: 9
                     }, this)
                 ]
@@ -138,123 +112,116 @@ function Home() {
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-                className: "z-10 w-full max-w-5xl text-center px-4",
+                className: "z-10 max-w-6xl mx-auto text-center px-4",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                        className: "text-3xl font-semibold mb-10 text-gray-100",
+                        className: "text-3xl font-bold text-green-800 mb-10",
                         children: "How It Works"
                     }, void 0, false, {
                         fileName: "[project]/src/app/page.js",
-                        lineNumber: 66,
+                        lineNumber: 53,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "grid md:grid-cols-3 gap-8 text-gray-200",
+                        className: "grid md:grid-cols-3 gap-8",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-md hover:scale-[1.03] transition-transform duration-300",
+                                className: "bg-white border border-green-300 p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                        className: "font-semibold text-lg mb-2 text-[#AFA3FF]",
-                                        children: "1. Sign Up"
+                                        className: "text-xl font-semibold text-green-700 mb-3",
+                                        children: "Sign Up"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/page.js",
-                                        lineNumber: 71,
+                                        lineNumber: 59,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                        className: "text-gray-300 text-sm",
-                                        children: "Create your account using email or Google sign-in to get started."
+                                        className: "text-green-600 text-sm",
+                                        children: "Create an account securely with email authentication."
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/page.js",
-                                        lineNumber: 74,
+                                        lineNumber: 60,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/page.js",
-                                lineNumber: 70,
+                                lineNumber: 58,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-md hover:scale-[1.03] transition-transform duration-300",
+                                className: "bg-white border border-green-300 p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                        className: "font-semibold text-lg mb-2 text-[#AFA3FF]",
-                                        children: "2. Register Face"
+                                        className: "text-xl font-semibold text-green-700 mb-3",
+                                        children: "Register Face"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/page.js",
-                                        lineNumber: 80,
+                                        lineNumber: 66,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                        className: "text-gray-300 text-sm",
-                                        children: "Scan your face once and the system securely registers your profile."
+                                        className: "text-green-600 text-sm",
+                                        children: "Scan & register your face once — encrypted & protected."
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/page.js",
-                                        lineNumber: 83,
+                                        lineNumber: 69,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/page.js",
-                                lineNumber: 79,
+                                lineNumber: 65,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-md hover:scale-[1.03] transition-transform duration-300",
+                                className: "bg-white border border-green-300 p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                        className: "font-semibold text-lg mb-2 text-[#AFA3FF]",
-                                        children: "3. Mark Attendance"
+                                        className: "text-xl font-semibold text-green-700 mb-3",
+                                        children: "Mark Attendance"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/page.js",
-                                        lineNumber: 89,
+                                        lineNumber: 75,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                        className: "text-gray-300 text-sm",
-                                        children: "Simply look into the camera — your attendance is logged instantly."
+                                        className: "text-green-600 text-sm",
+                                        children: "Just look into the camera — attendance done instantly."
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/page.js",
-                                        lineNumber: 92,
+                                        lineNumber: 78,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/page.js",
-                                lineNumber: 88,
+                                lineNumber: 74,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/page.js",
-                        lineNumber: 69,
+                        lineNumber: 57,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/page.js",
-                lineNumber: 65,
+                lineNumber: 52,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
-                className: "z-10 mt-16 text-gray-400 text-sm",
+                className: "z-10 mt-16 text-green-700 text-sm text-center",
                 children: [
                     "© ",
                     new Date().getFullYear(),
-                    " Face Recognition Attendance System"
+                    " AttendEase — Smart Attendance System"
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/page.js",
-                lineNumber: 100,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "absolute inset-0 pointer-events-none animate-pulse bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.04),transparent)]"
-            }, void 0, false, {
-                fileName: "[project]/src/app/page.js",
-                lineNumber: 105,
+                lineNumber: 86,
                 columnNumber: 7
             }, this)
         ]

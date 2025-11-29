@@ -106,7 +106,7 @@ const LoginPage = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full py-2 rounded-lg font-semibold text-white bg-green-600 shadow-md transition-transform
+            className={`w-full cursor-pointer py-2 rounded-lg font-semibold text-white bg-green-600 shadow-md transition-transform
             ${isLoading ? "opacity-70 cursor-not-allowed" : "hover:bg-green-700 hover:scale-[1.02]"}`}
           >
             {isLoading ? "Logging in..." : "Login"}
@@ -119,7 +119,7 @@ const LoginPage = () => {
         <p className="text-sm text-center text-green-700">
           Don’t have an account?{" "}
           <button
-            className="font-semibold text-green-900 hover:underline"
+            className="font-semibold cursor-pointer text-green-900 hover:underline"
             onClick={() => router.push("/signup")}
           >
             Sign Up

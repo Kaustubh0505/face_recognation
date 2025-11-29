@@ -7,12 +7,12 @@ const prisma = new PrismaClient();
 router.post("/register", async (req, res) => {
   try {
     const { userId, descriptor } = req.body;
-    
+
     const existingFace = await prisma.faceEmbedding.findFirst({
       where: { userId },
     });
     
-    console.log(12)
+
     if (existingFace) {
       return res.status(400).json({ msg: "User already registered" });
     }
@@ -27,7 +27,7 @@ router.post("/register", async (req, res) => {
 
   } catch (err) {
     console.error("err" , err);
-    res.status(500).json({ msg: " x Server error" });
+    res.status(500).json({ msg: "Register Server error" });
   }
 });
 

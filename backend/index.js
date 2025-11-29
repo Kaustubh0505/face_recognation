@@ -16,7 +16,7 @@ const prisma = new PrismaClient();
 app.use(cors({
   origin: [
     "https://face-recognation-omega.vercel.app",
-    "http://localhost:3000"
+    "http://localhost:3001"
   ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -108,5 +108,5 @@ app.post("/login", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

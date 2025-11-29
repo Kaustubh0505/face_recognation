@@ -7,102 +7,85 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-[#432DD7] via-[#2A1B9C] to-[#0F0B2E] text-white">
+    <div className="min-h-screen bg-gradient-to-br from-white via-[#E6F8E7] to-[#CFF5D1] p-6 text-green-900 relative">
+
       <Head>
-        <title>Face Recognition Attendance System</title>
+        <title>AttendEase - Face Recognition Attendance System</title>
         <meta
           name="description"
-          content="Mark attendance automatically using facial recognition"
+          content="Smart Attendance powered by AI Facial Recognition"
         />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* Soft glowing orbs */}
-      <div className="absolute -top-40 -left-32 w-[500px] h-[500px] bg-[#432DD7]/25 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#6E57FF]/20 rounded-full blur-3xl"></div>
+      {/* Background Shapes */}
+      <div className="absolute top-0 left-0 w-64 h-64 bg-green-200/40 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-green-300/30 rounded-full blur-3xl"></div>
 
       {/* Hero Section */}
-      <header className="z-10 w-full max-w-4xl text-center mb-16 px-4">
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight">
-          Face Recognition Attendance System
+      <header className="z-10 text-center max-w-4xl mx-auto mt-12 mb-16">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-green-700">
+          AttendEase
         </h1>
-        <p className="text-gray-300 text-lg md:text-xl">
-          Seamlessly mark attendance using AI-powered facial recognition
+        <p className="mt-4 text-lg md:text-xl text-green-600">
+          Touchless Attendance Authentication Using AI Face Matching
         </p>
       </header>
 
-      {/* Action Buttons */}
-      <div className="z-10 flex flex-col md:flex-row gap-6 mb-20">
+      {/* Call-To-Action Buttons */}
+      <div className="z-10 flex flex-col md:flex-row gap-6 justify-center mb-20">
         <button
           onClick={() => router.push("/signup")}
-          className="px-8 cursor-pointer py-3 bg-gradient-to-r from-[#6E57FF] to-[#432DD7] text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.05] transition-all duration-300"
+          className="px-10 py-3 cursor-pointer bg-green-600 text-white font-semibold rounded-xl shadow hover:bg-green-700 hover:scale-105 transition"
         >
           Sign Up
         </button>
+
         <button
           onClick={() => router.push("/login")}
-          className="px-8 cursor-pointer py-3 bg-white/10 border border-white/30 text-white font-semibold rounded-xl shadow-lg hover:bg-white/20 hover:scale-[1.05] transition-all duration-300"
+          className="px-10 py-3 bg-white border cursor-pointer border-green-300 text-green-700 font-semibold rounded-xl shadow hover:bg-green-50 hover:scale-105 transition"
         >
           Login
         </button>
-
-        <button
-          onClick={() => router.push("/dashboard")}
-          className="px-8 cursor-pointer py-3 bg-gradient-to-r from-[#FF6B6B] to-[#EE5A6F] text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.05] transition-all duration-300"
-        >
-          Dashboard
-        </button>
-
-        <button
-          onClick={() => router.push("/attendance")}
-          className="px-8 cursor-pointer py-3 bg-gradient-to-r from-[#00B4DB] to-[#0083B0] text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.05] transition-all duration-300"
-        >
-          Mark Attendance
-        </button>
       </div>
 
-      {/* How It Works Section */}
-      <section className="z-10 w-full max-w-5xl text-center px-4">
-        <h2 className="text-3xl font-semibold mb-10 text-gray-100">
+      {/* How It Works */}
+      <section className="z-10 max-w-6xl mx-auto text-center px-4">
+        <h2 className="text-3xl font-bold text-green-800 mb-10">
           How It Works
         </h2>
-        <div className="grid md:grid-cols-3 gap-8 text-gray-200">
-          <div className="p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-md hover:scale-[1.03] transition-transform duration-300">
-            <h3 className="font-semibold text-lg mb-2 text-[#AFA3FF]">
-              1. Sign Up
-            </h3>
-            <p className="text-gray-300 text-sm">
-              Create your account using email or Google sign-in to get started.
+
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="bg-white border border-green-300 p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition">
+            <h3 className="text-xl font-semibold text-green-700 mb-3">Sign Up</h3>
+            <p className="text-green-600 text-sm">
+              Create an account securely with email authentication.
             </p>
           </div>
 
-          <div className="p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-md hover:scale-[1.03] transition-transform duration-300">
-            <h3 className="font-semibold text-lg mb-2 text-[#AFA3FF]">
-              2. Register Face
+          <div className="bg-white border border-green-300 p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition">
+            <h3 className="text-xl font-semibold text-green-700 mb-3">
+              Register Face
             </h3>
-            <p className="text-gray-300 text-sm">
-              Scan your face once and the system securely registers your profile.
+            <p className="text-green-600 text-sm">
+              Scan & register your face once — encrypted & protected.
             </p>
           </div>
 
-          <div className="p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-md hover:scale-[1.03] transition-transform duration-300">
-            <h3 className="font-semibold text-lg mb-2 text-[#AFA3FF]">
-              3. Mark Attendance
+          <div className="bg-white border border-green-300 p-6 rounded-2xl shadow hover:shadow-lg hover:-translate-y-1 transition">
+            <h3 className="text-xl font-semibold text-green-700 mb-3">
+              Mark Attendance
             </h3>
-            <p className="text-gray-300 text-sm">
-              Simply look into the camera — your attendance is logged instantly.
+            <p className="text-green-600 text-sm">
+              Just look into the camera — attendance done instantly.
             </p>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="z-10 mt-16 text-gray-400 text-sm">
-        &copy; {new Date().getFullYear()} Face Recognition Attendance System
+      <footer className="z-10 mt-16 text-green-700 text-sm text-center">
+        © {new Date().getFullYear()} AttendEase — Smart Attendance System
       </footer>
-
-      {/* Ambient Light Overlay */}
-      <div className="absolute inset-0 pointer-events-none animate-pulse bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.04),transparent)]"></div>
     </div>
   );
 }
