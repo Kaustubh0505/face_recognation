@@ -28,7 +28,6 @@ const LoginPage = () => {
         body: JSON.stringify({ email, password }),
       });
 
-
       const data = await res.json();
 
       if (!res.ok) {
@@ -43,7 +42,6 @@ const LoginPage = () => {
 
       router.push("/dashboard");
 
-
     } catch (err) {
       setError("Something went wrong. Try again!");
       console.log(err);
@@ -53,80 +51,81 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-gradient-to-br from-[#432DD7] via-[#2C1A8C] to-[#0F0B2E] text-white">
-      {/* Decorative gradients */}
-      <div className="absolute -top-32 -left-20 w-96 h-96 bg-[#432DD7]/30 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#432DD7]/20 rounded-full blur-3xl"></div>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-[#E6F8E7] to-[#CCF4D0] p-4">
+      
+      <div className="absolute top-10 left-10 w-32 h-32 bg-green-200/30 blur-2xl rounded-full"></div>
+      <div className="absolute bottom-10 right-10 w-40 h-40 bg-green-300/25 blur-3xl rounded-full"></div>
 
-      <div className="relative z-10 bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-2xl shadow-2xl w-96">
-        <h1 className="text-3xl font-bold text-center mb-2">Welcome Back</h1>
-        <p className="text-center text-sm text-gray-300 mb-6">
-          Login to continue managing attendance.
+      <div className="relative bg-white shadow-xl rounded-3xl p-10 w-full max-w-md border border-green-100 duration-300">
+        
+        <h2 className="text-3xl font-bold text-green-700 text-center mb-2">
+          Attendance Portal
+        </h2>
+        <p className="text-center text-green-600/80 mb-8">
+          Please login to continue
         </p>
 
         <form onSubmit={handleLogin}>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-200">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full px-4 py-2 bg-white/20 border border-white/30 rounded-md text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#6E57FF] transition"
-              placeholder="you@example.com"
-              required
-            />
+          
+          <div className="mb-5">
+            <label className="text-green-800 text-sm font-semibold">Email</label>
+            <div className="mt-1 flex items-center bg-green-50 border border-green-300 rounded-lg px-3">
+              <span className="text-green-700">📧</span>
+              <input
+                type="email"
+                className="w-full bg-transparent py-2 px-2 focus:outline-none text-green-900"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
           </div>
 
-          <div className="mb-4">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-200">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full px-4 py-2 bg-white/20 border border-white/30 rounded-md text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#6E57FF] transition"
-              placeholder="••••••••"
-              required
-            />
+          <div className="mb-5">
+            <label className="text-green-800 text-sm font-semibold">Password</label>
+            <div className="mt-1 flex items-center bg-green-50 border border-green-300 rounded-lg px-3">
+              <span className="text-green-700">🔒</span>
+              <input
+                type="password"
+                className="w-full bg-transparent py-2 px-2 focus:outline-none text-green-900"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
           </div>
 
-          {error && <p className="text-red-400 text-sm mb-4">{error}</p>}
+          {error && (
+            <p className="text-red-600 text-sm mb-4 text-center">
+              {error}
+            </p>
+          )}
 
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full cursor-pointer bg-gradient-to-r from-[#6E57FF] to-[#432DD7] py-2 rounded-md text-white font-semibold shadow-md transition-transform duration-300
-              ${isLoading ? "opacity-70 cursor-not-allowed" : "hover:shadow-lg hover:scale-[1.02]"}`}
+            className={`w-full py-2 rounded-lg font-semibold text-white bg-green-600 shadow-md transition-transform
+            ${isLoading ? "opacity-70 cursor-not-allowed" : "hover:bg-green-700 hover:scale-[1.02]"}`}
           >
-            {isLoading ? (
-              <div className="flex items-center justify-center gap-2">
-                <div className="w-5 h-5 border-[3px] border-white border-t-transparent rounded-full animate-spin"></div>
-                Logging in...
-              </div>
-            ) : (
-              "Login"
-            )}
+            {isLoading ? "Logging in..." : "Login"}
           </button>
+
         </form>
 
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-300">Don't have an account?</p>
-          <button
-            onClick={() => router.push("/signup")}
-            className="text-[#A896FF] font-medium hover:text-white transition"
-          >
-            Signup
-          </button>
-        </div>
-      </div>
+        <div className="my-6 border-t border-green-200"></div>
 
-      {/* Glow effect */}
-      <div className="absolute inset-0 pointer-events-none animate-pulse bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.05),transparent)]"></div>
+        <p className="text-sm text-center text-green-700">
+          Don’t have an account?{" "}
+          <button
+            className="font-semibold text-green-900 hover:underline"
+            onClick={() => router.push("/signup")}
+          >
+            Sign Up
+          </button>
+        </p>
+      </div>
     </div>
   );
 };
