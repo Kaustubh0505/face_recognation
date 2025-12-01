@@ -35,15 +35,17 @@ router.post("/mark", async (req, res) => {
       return res.status(403).json({ msg: "Unauthorized Face - Not the registered user" });
     }
 
-    const startOfDay = new Date();
-    startOfDay.setHours(0, 0, 0, 0);
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000)
 
     const alreadyMarked = await prisma.attendance.findFirst({
       where: {
         userId,
-        timestamp: { gte: startOfDay },
+        timestamp: {
+          gte: oneHourAgo,
+        },
       },
     });
+
 
     if (alreadyMarked) {
       return res.json({ msg: "Attendance already marked today!" });

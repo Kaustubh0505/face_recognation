@@ -16,6 +16,7 @@ const prisma = new PrismaClient();
 app.use(cors({
   origin: [
     "https://face-recognation-omega.vercel.app",
+    "http://20.189.75.255:3000",
     "http://localhost:3001"
   ],
   credentials: true,
@@ -34,6 +35,7 @@ app.get("/", (req, res) => {
 });
 
 // Signup Route
+
 app.post("/signup", async (req, res) => {
   try {
     const { email, password } = req.body;
