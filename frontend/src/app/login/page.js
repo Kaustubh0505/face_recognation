@@ -40,7 +40,12 @@ const LoginPage = () => {
       localStorage.setItem("userId", data.user.id);
       localStorage.setItem("userEmail", data.user.email);
 
-      router.push("/dashboard");
+
+      if (data.user.email === "admin@gmail.com") {
+        router.push("/admin");
+      } else {
+        router.push("/dashboard");
+      }
 
     } catch (err) {
       setError("Something went wrong. Try again!");

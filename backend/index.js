@@ -6,6 +6,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import faceRoutes from "./routes/faceRoutes.js";
 import attendanceRoutes from "./routes/attendanceRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use(express.json());
 // Routes
 app.use("/api/face", faceRoutes);
 app.use("/api/attendance", attendanceRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).send("Backend + Prisma is connected!");
@@ -59,7 +61,7 @@ app.post("/signup", async (req, res) => {
 
     return res.status(201).json({ message: "User created successfully!" });
 
-  }  catch (err) {
+  } catch (err) {
     console.error("Signup error:", err); // 🔍 Add this
     return res.status(500).json({ message: "Server error!" });
   }
@@ -105,7 +107,7 @@ app.post("/login", async (req, res) => {
     });
 
   } catch (err) {
-    console.log("err" , err);
+    console.log("err", err);
     res.status(500).json({ message: "312Server Error" });
   }
 });
