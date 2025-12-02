@@ -70,7 +70,6 @@ const LoginPage = () => {
           <div className="mb-5">
             <label className="text-green-800 text-sm font-semibold">Email</label>
             <div className="mt-1 flex items-center bg-green-50 border border-green-300 rounded-lg px-3">
-              <span className="text-green-700">📧</span>
               <input
                 type="email"
                 className="w-full bg-transparent py-2 px-2 focus:outline-none text-green-900"
@@ -85,7 +84,6 @@ const LoginPage = () => {
           <div className="mb-5">
             <label className="text-green-800 text-sm font-semibold">Password</label>
             <div className="mt-1 flex items-center bg-green-50 border border-green-300 rounded-lg px-3">
-              <span className="text-green-700">🔒</span>
               <input
                 type="password"
                 className="w-full bg-transparent py-2 px-2 focus:outline-none text-green-900"

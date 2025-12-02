@@ -91,26 +91,37 @@ export default function RegisterFace() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-[#E6F8E7] to-[#CFF5D1] p-6 text-green-900">
-
+  
       {/* Background Decoration */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-green-200/40 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-green-300/30 rounded-full blur-3xl"></div>
-
+  
       {/* Card */}
       <div className="relative z-10 w-full max-w-lg bg-white border border-green-300 shadow-xl rounded-3xl p-8">
-
-        <h2 className="text-3xl font-bold text-center mb-2 text-green-700">
-          Register Face
+  
+        <h2 className="text-3xl font-extrabold text-center mb-2 text-green-800 drop-shadow">
+          Register Your Face
         </h2>
-        <p className="text-center text-green-600 mb-6 text-sm">
-          Capture your face to enable secure attendance.
+  
+        <p className="text-center text-green-600 mb-6 text-sm leading-relaxed">
+          To ensure secure and seamless attendance, we use face recognition!  
+          📸 Just look at the camera and follow the instructions below.
         </p>
-
+  
+        <div className="bg-green-50 text-green-700 text-sm p-3 rounded-xl mb-6 shadow-sm border border-green-100">
+          <p className="font-medium">Tips for best face capture:</p>
+          <ul className="list-disc ml-5 mt-1 text-xs space-y-1">
+            <li>Ensure proper lighting on your face</li>
+            <li>Look straight into the camera</li>
+            <li>Avoid covering your face — remove mask or glasses if possible</li>
+          </ul>
+        </div>
+  
         {/* Camera */}
         <div className="flex justify-center mb-6">
           <FaceCamera onCapture={handleCapture} />
         </div>
-
+  
         {/* Status Messages */}
         {status.message && (
           <div
@@ -128,14 +139,23 @@ export default function RegisterFace() {
             {status.message}
           </div>
         )}
-
+  
         {/* Loader */}
         {isLoading && (
-          <p className="text-center text-green-700 mt-4 animate-pulse">
-            Processing… Please wait
+          <p className="text-center text-green-700 mt-4 animate-pulse font-medium">
+            Processing… Please wait ⏳
           </p>
         )}
+  
+        {/* Footer Encouragement Text */}
+        {!isLoading && !status.message && (
+          <p className="text-center text-xs text-green-600 mt-4 italic">
+            “One quick scan now saves you time every single day!” 🌱
+          </p>
+        )}
+  
       </div>
     </div>
   );
+  
 }
