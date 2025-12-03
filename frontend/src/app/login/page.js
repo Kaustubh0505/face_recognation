@@ -27,6 +27,7 @@ const LoginPage = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
+      console.log("result",res)
 
       const data = await res.json();
 
@@ -48,8 +49,8 @@ const LoginPage = () => {
       }
 
     } catch (err) {
-      setError("Something went wrong. Try again!");
       console.log(err);
+      setError("Something went wrong. Try again!");
     }
 
     setIsLoading(false);

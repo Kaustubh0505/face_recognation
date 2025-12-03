@@ -5,7 +5,6 @@ import AdminLayout from "@/components/AdminLayout";
 import ConfirmModal from "@/components/ConfirmModal";
 import { Search, Trash2, ChevronLeft, ChevronRight, AlertTriangle, Loader2 } from "lucide-react";
 
-
 export default function DeleteStudent() {
     const router = useRouter();
     const [userEmail, setUserEmail] = useState("");
@@ -29,25 +28,32 @@ export default function DeleteStudent() {
         }
     }, [router]);
 
+    // SEARCH FUNCTION
     useEffect(() => {
         const filtered = students.filter((student) =>
             student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             student.email.toLowerCase().includes(searchQuery.toLowerCase())
         );
+
         setFilteredStudents(filtered);
         setCurrentPage(1);
     }, [searchQuery, students]);
 
+
+    // FETCH STUDENT DATA
     const fetchStudents = async () => {
         try {
             setLoading(true);
-            const response = await fetch(`${process.env}/api/admin/students?limit=100`);
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_BACKENDURL}/api/admin/students`
+            );
 
             if (!response.ok) {
                 throw new Error("Failed to fetch students");
             }
 
             const data = await response.json();
+
             setStudents(data.students || []);
         } catch (err) {
             console.error("Fetch students error:", err);
@@ -55,7 +61,7 @@ export default function DeleteStudent() {
         } finally {
             setLoading(false);
         }
-    };
+    }
 
     const totalPages = Math.ceil(filteredStudents.length / studentsPerPage);
     const startIndex = (currentPage - 1) * studentsPerPage;
@@ -68,9 +74,12 @@ export default function DeleteStudent() {
 
     const handleConfirmDelete = async () => {
         try {
-            const response = await fetch(`${API_URL}/api/admin/students/${selectedStudent.id}`, {
-                method: "DELETE",
-            });
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_BACKENDURL}/api/admin/students/${selectedStudent.id}`,
+                {
+                    method: "DELETE",
+                }
+            );
 
             if (!response.ok) {
                 const error = await response.json();
@@ -78,10 +87,13 @@ export default function DeleteStudent() {
             }
 
             const data = await response.json();
-            setMessage({ text: data.msg || `Student "${selectedStudent.name}" has been deleted successfully.`, type: "success" });
+            setMessage({
+                text: data.msg || `Student "${selectedStudent.studentName}" has been deleted successfully.`,
+                type: "success"
+            });
             setModalOpen(false);
             setSelectedStudent(null);
-            fetchStudents(); // Refresh the list
+            fetchStudents();
             setTimeout(() => setMessage({ text: "", type: "" }), 4000);
         } catch (err) {
             console.error("Delete error:", err);
@@ -117,14 +129,24 @@ export default function DeleteStudent() {
                             placeholder="Search by name or email..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="flex-1 px-4 py-2 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            className="flex-1 px-4 py-2 border border-green-200 rounded-lg
+               focus:ring-2 focus:ring-green-500
+               placeholder:text-gray-600
+               text-gray-900 bg-white"
                         />
+
                     </div>
                 </div>
 
+
                 {/* Success/Error Message */}
                 {message.text && (
-                    <div className={`mb-6 p-4 rounded-lg ${message.type === "success" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
+                    <div
+                        className={`mb-6 p-4 rounded-lg ${message.type === "success"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-red-100 text-red-800"
+                            }`}
+                    >
                         {message.text}
                     </div>
                 )}
@@ -137,7 +159,7 @@ export default function DeleteStudent() {
                     </div>
                 ) : (
                     <>
-                        {/* Student Cards Grid */}
+                        {/* Student Cards */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                             {currentStudents.map((student) => (
                                 <div
@@ -152,25 +174,17 @@ export default function DeleteStudent() {
                                     </div>
 
                                     <div className="space-y-2 mb-4">
-                                        <div className="flex justify-between text-sm">
-                                            <span className="text-gray-600">Class:</span>
-                                            <span className="font-medium text-gray-800">{student.class}</span>
-                                        </div>
+
                                         <div className="flex justify-between text-sm">
                                             <span className="text-gray-600">Roll No:</span>
-                                            <span className="font-medium text-gray-800">{student.rollNo}</span>
+                                            <span className="font-medium text-gray-800">{student.id}</span>
                                         </div>
-                                        <div className="flex justify-between text-sm">
-                                            <span className="text-gray-600">Face Data:</span>
-                                            <span className={`font-medium ${student.hasFaceData ? "text-green-600" : "text-red-600"}`}>
-                                                {student.hasFaceData ? "Registered" : "Not Registered"}
-                                            </span>
-                                        </div>
+
                                     </div>
 
                                     <button
                                         onClick={() => handleDeleteClick(student)}
-                                        className="w-full flex items-center justify-center gap-2 bg-red-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition-colors"
+                                        className="w-full cursor-pointer  flex items-center justify-center gap-2 bg-red-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition-colors"
                                     >
                                         <Trash2 className="w-4 h-4" />
                                         Delete Student
@@ -179,6 +193,7 @@ export default function DeleteStudent() {
                             ))}
                         </div>
 
+                        {/* No results */}
                         {currentStudents.length === 0 && !loading && (
                             <div className="bg-white p-12 rounded-2xl shadow-lg text-center text-gray-500">
                                 No students found matching your search.
@@ -189,7 +204,8 @@ export default function DeleteStudent() {
                         {totalPages > 1 && (
                             <div className="flex items-center justify-between bg-white p-6 rounded-2xl shadow-lg">
                                 <div className="text-sm text-gray-600">
-                                    Showing {startIndex + 1} to {Math.min(startIndex + studentsPerPage, filteredStudents.length)} of{" "}
+                                    Showing {startIndex + 1} to{" "}
+                                    {Math.min(startIndex + studentsPerPage, filteredStudents.length)} of{" "}
                                     {filteredStudents.length} students
                                 </div>
                                 <div className="flex gap-2">
@@ -201,9 +217,11 @@ export default function DeleteStudent() {
                                         <ChevronLeft className="w-4 h-4" />
                                         Previous
                                     </button>
+
                                     <span className="flex items-center px-4 py-2 text-green-700 font-medium">
                                         Page {currentPage} of {totalPages}
                                     </span>
+
                                     <button
                                         onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                                         disabled={currentPage === totalPages}
@@ -218,11 +236,11 @@ export default function DeleteStudent() {
                     </>
                 )}
 
-                {/* Confirmation Modal */}
+                {/* Confirm Modal */}
                 <ConfirmModal
                     isOpen={modalOpen}
                     title="Confirm Deletion"
-                    message={`Are you sure you want to delete "${selectedStudent?.name}"? This will permanently remove all their attendance records and cannot be undone.`}
+                    message={`Are you sure you want to delete "${selectedStudent?.studentName}"? This will permanently remove all their attendance records and cannot be undone.`}
                     onConfirm={handleConfirmDelete}
                     onCancel={() => {
                         setModalOpen(false);
@@ -233,3 +251,4 @@ export default function DeleteStudent() {
         </AdminLayout>
     );
 }
+

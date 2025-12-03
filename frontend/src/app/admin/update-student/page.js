@@ -13,7 +13,6 @@ export default function UpdateStudent() {
     const [selectedStudentId, setSelectedStudentId] = useState("");
     const [formData, setFormData] = useState({
         email: "",
-        role: "",
     });
     const [errors, setErrors] = useState({});
     const [message, setMessage] = useState({ text: "", type: "" });
@@ -64,7 +63,6 @@ export default function UpdateStudent() {
                 const student = await response.json();
                 setFormData({
                     email: student.email,
-                    role: student.class,
                 });
                 setErrors({});
             } catch (err) {
@@ -72,7 +70,7 @@ export default function UpdateStudent() {
                 setMessage({ text: "Failed to load student details", type: "error" });
             }
         } else {
-            setFormData({ email: "", role: "" });
+            setFormData({ email: "" });
         }
     };
 
@@ -110,7 +108,6 @@ export default function UpdateStudent() {
                 },
                 body: JSON.stringify({
                     email: formData.email,
-                    role: formData.role || null,
                 }),
             });
 
@@ -121,7 +118,7 @@ export default function UpdateStudent() {
 
             const data = await response.json();
             setMessage({ text: data.msg || "Student details updated successfully!", type: "success" });
-            fetchStudents(); // Refresh the list
+            fetchStudents(); 
             setTimeout(() => setMessage({ text: "", type: "" }), 4000);
         } catch (err) {
             console.error("Update error:", err);
@@ -134,7 +131,7 @@ export default function UpdateStudent() {
 
     const handleCancel = () => {
         setSelectedStudentId("");
-        setFormData({ email: "", role: "" });
+        setFormData({ email: "" });
         setErrors({});
         setMessage({ text: "", type: "" });
     };
@@ -156,8 +153,11 @@ export default function UpdateStudent() {
             }
 
             const data = await response.json();
-            setMessage({ text: data.msg || "Photo refresh initiated. Please direct the student to re-register their face.", type: "success" });
-            fetchStudents(); // Refresh the list
+            setMessage({
+                text: data.msg || "Photo refresh initiated. Please direct the student to re-register their face.",
+                type: "success",
+            });
+            fetchStudents();
             setTimeout(() => setMessage({ text: "", type: "" }), 4000);
         } catch (err) {
             console.error("Photo refresh error:", err);
@@ -173,12 +173,13 @@ export default function UpdateStudent() {
             <div className="max-w-4xl mx-auto">
                 <h2 className="text-3xl font-bold text-green-800 mb-6">Update Student Details</h2>
 
-                {/* Student Selection */}
+                {/* Student Dropdown */}
                 <div className="bg-white p-6 rounded-2xl shadow-lg mb-6">
                     <label className="block text-sm font-medium text-green-700 mb-2">
                         <User className="w-4 h-4 inline mr-1" />
                         Select Student
                     </label>
+
                     {loading ? (
                         <div className="flex items-center justify-center py-4">
                             <Loader2 className="w-6 h-6 text-green-600 animate-spin" />
@@ -188,9 +189,14 @@ export default function UpdateStudent() {
                         <select
                             value={selectedStudentId}
                             onChange={handleStudentSelect}
-                            className="w-full px-4 py-3 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-lg"
+                            className="w-full px-4 py-3 border border-green-200 rounded-lg
+                                       focus:ring-2 focus:ring-green-500 focus:border-transparent
+                                       text-green-900 text-lg bg-white"
                         >
-                            <option value="">-- Choose a student --</option>
+                            <option value="" className="text-gray-500">
+                                -- Choose a student --
+                            </option>
+
                             {students.map((student) => (
                                 <option key={student.id} value={student.id}>
                                     {student.name} ({student.email})
@@ -200,34 +206,35 @@ export default function UpdateStudent() {
                     )}
                 </div>
 
-                {/* Success/Error Message */}
+                {/* Message */}
                 {message.text && (
                     <div className={`mb-6 p-4 rounded-lg ${message.type === "success" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
                         {message.text}
                     </div>
                 )}
 
-                {/* Edit Form */}
+                {/* Form */}
                 {selectedStudentId && selectedStudent && (
                     <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-lg">
+
                         <h3 className="text-xl font-semibold text-green-800 mb-6">Student Information</h3>
 
                         <div className="space-y-5">
-                            {/* Name Display (Read-only from email) */}
+
+                            {/* Name (readonly) */}
                             <div>
                                 <label className="block text-sm font-medium text-green-700 mb-2">
-                                    Full Name (Generated from Email)
+                                    Full Name
                                 </label>
                                 <input
                                     type="text"
                                     value={selectedStudent.name}
                                     disabled
-                                    className="w-full px-4 py-3 border border-green-200 rounded-lg bg-gray-50 text-gray-600"
+                                    className="w-full px-4 py-3 border border-green-200 rounded-lg bg-gray-50 text-gray-700 font-medium"
                                 />
-                                <p className="text-xs text-gray-500 mt-1">Name is automatically generated from email address</p>
                             </div>
 
-                            {/* Email Field */}
+                            {/* Email */}
                             <div>
                                 <label className="block text-sm font-medium text-green-700 mb-2">
                                     <Mail className="w-4 h-4 inline mr-1" />
@@ -237,40 +244,22 @@ export default function UpdateStudent() {
                                     type="email"
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${errors.email ? "border-red-500" : "border-green-200"
-                                        }`}
+                                    className={`w-full px-4 py-3 border rounded-lg 
+                                            text-green-900 placeholder-gray-400
+                                            focus:ring-2 focus:ring-green-500 focus:border-transparent
+                                            ${errors.email ? "border-red-500" : "border-green-200"}`}
                                     placeholder="student@example.com"
                                 />
                                 {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                             </div>
 
-                            {/* Class Field */}
-                            <div>
-                                <label className="block text-sm font-medium text-green-700 mb-2">
-                                    Class
-                                </label>
-                                <select
-                                    value={formData.role}
-                                    onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                                    className="w-full px-4 py-3 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                                >
-                                    <option value="">Not Assigned</option>
-                                    <option value="10A">Class 10A</option>
-                                    <option value="10B">Class 10B</option>
-                                    <option value="11A">Class 11A</option>
-                                    <option value="11B">Class 11B</option>
-                                    <option value="12A">Class 12A</option>
-                                    <option value="12B">Class 12B</option>
-                                </select>
-                            </div>
-
-                            {/* Photo Refresh Section */}
+                            {/* Photo Refresh */}
                             <div className="bg-green-50 p-4 rounded-lg border border-green-200">
                                 <div className="flex items-start justify-between">
                                     <div className="flex-1">
                                         <h4 className="font-semibold text-green-800 mb-1">Face Photo Refresh</h4>
                                         <p className="text-sm text-green-700 mb-2">
-                                            Request student to re-register their facial data for attendance system
+                                            Ask the student to re-register their face
                                         </p>
                                         <p className="text-xs text-green-600">
                                             Status: {selectedStudent.hasFaceData ? "✓ Registered" : "✗ Not Registered"}
@@ -287,12 +276,12 @@ export default function UpdateStudent() {
                                 </div>
                             </div>
 
-                            {/* Action Buttons */}
+                            {/* Buttons */}
                             <div className="flex gap-4 pt-4">
                                 <button
                                     type="submit"
                                     disabled={submitting}
-                                    className="flex-1 flex items-center justify-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                                    className="flex-1 flex items-center justify-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors disabled:bg-gray-400"
                                 >
                                     {submitting ? (
                                         <>
@@ -306,6 +295,7 @@ export default function UpdateStudent() {
                                         </>
                                     )}
                                 </button>
+
                                 <button
                                     type="button"
                                     onClick={handleCancel}
@@ -315,6 +305,7 @@ export default function UpdateStudent() {
                                     Cancel
                                 </button>
                             </div>
+
                         </div>
                     </form>
                 )}
@@ -322,7 +313,7 @@ export default function UpdateStudent() {
                 {!selectedStudentId && !loading && (
                     <div className="bg-white p-12 rounded-2xl shadow-lg text-center text-gray-500">
                         <User className="w-16 h-16 mx-auto mb-4 text-gray-400" />
-                        <p className="text-lg">Please select a student from the dropdown above to edit their details.</p>
+                        <p className="text-lg">Please select a student from the dropdown above.</p>
                     </div>
                 )}
             </div>

@@ -18,7 +18,8 @@ app.use(cors({
   origin: [
     "https://face-recognation-omega.vercel.app",
     "http://20.189.75.255:3000",
-    "http://localhost:3001"
+    "http://localhost:3000",
+    "http://localhost:3002"
   ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
